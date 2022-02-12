@@ -4,21 +4,24 @@ import {useState, useEffect} from 'react'
 import Header from './components/Header'
 import Contracts from './components/Contracts'
 import Filters from './components/Filters'
+import Pinned from './components/Pinned'
 import './App.css';
 
-const socket = io.connect('https://new-contract.herokuapp.com/')
+const socket = io.connect('http://localhost:5000')
 
 function App() {
 
 const[showFilters, setShowFilters] = useState(false)
 const[contracts, setContracts] = useState([])
 const[filters, setFilters] = useState({name: "", decimals: "", supply: "", date: ""})
+const[pinnedContracts, setPinnedContracts] = useState([])
 
 useEffect(() => {
     const getContracts = async () => {
     fetchContracts()
     socket.on('request', ({ data }) => {
         setContracts(data)
+        console.log(data)
     })
     }
 
@@ -92,11 +95,26 @@ const changeFilters = (name, decimals, supply, date) => {
     setContracts(contracts.map((contract) => checkFilters(name, decimals, supply , date, contract) ? {...contract, nameFilter : true} : {...contract, nameFilter : false}))
 }
 
+const pinContract = (id) => {
+    let newPinnedContracts = contracts.filter(contract => contract._id == id)
+    setPinnedContracts([...pinnedContracts, ...newPinnedContracts])
+}
+
+const unpinContract = (id) => {
+    setPinnedContracts(pinnedContracts.filter(contract => contract._id != id))
+}
+
 return (
-    <div className="container">
-    <Header onFilter={() => setShowFilters(!showFilters)} showFilters={showFilters}/>
-    { showFilters && <Filters  name={filters.name} decimals={filters.decimals} supply={filters.supply} date={filters.date} changeFilters={changeFilters} /> }
-    <Contracts contracts={contracts} />
+    <div className="fullscreen flex-parent">
+        <div className="container flex-child1">
+            <Header onFilter={() => setShowFilters(!showFilters)} showFilters={showFilters}/>
+            { showFilters && <Filters  name={filters.name} decimals={filters.decimals} supply={filters.supply} date={filters.date} changeFilters={changeFilters} /> }
+            <Contracts contracts={contracts} pinContract={pinContract} />
+        </div>
+        <div className='pinned flex-child2'>
+            <header className='header'> <h1>PINNED</h1></header>
+            {pinnedContracts.length > 0 && <Pinned pinnedContracts={pinnedContracts} unpinContract={unpinContract}/> }
+        </div>
     </div>
 );
 }

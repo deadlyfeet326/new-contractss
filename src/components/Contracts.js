@@ -1,11 +1,12 @@
 import Contract from './Contract'
 
-const Contracts = ( {contracts, changeName} ) => {
+const Contracts = ( {contracts, pinContract} ) => {
+  console.log(contracts)
   return (
     <div className='contractContainer'>
-        {contracts.slice(0).reverse().map((contract, index) => (
+        {contracts.map((contract, index) => (
              contract.nameFilter &&
-             <Contract key={index} contract={contract} changeName={changeName} />
+             <Contract key={index} contract={contract} pinContract={pinContract}/>
         ))}
     </div>
   )
