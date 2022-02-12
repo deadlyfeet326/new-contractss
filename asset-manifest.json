@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "/static/css/main.4bfb7439.css",
     "main.js": "/static/js/main.e1c28837.js",
     "static/js/787.a41db9a9.chunk.js": "/static/js/787.a41db9a9.chunk.js",
@@ -11,5 +12,18 @@
   "entrypoints": [
     "static/css/main.4bfb7439.css",
     "static/js/main.e1c28837.js"
+=======
+    "main.css": "/static/css/main.a90bc822.css",
+    "main.js": "/static/js/main.9db8fec8.js",
+    "static/js/787.a41db9a9.chunk.js": "/static/js/787.a41db9a9.chunk.js",
+    "index.html": "/index.html",
+    "main.a90bc822.css.map": "/static/css/main.a90bc822.css.map",
+    "main.9db8fec8.js.map": "/static/js/main.9db8fec8.js.map",
+    "787.a41db9a9.chunk.js.map": "/static/js/787.a41db9a9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a90bc822.css",
+    "static/js/main.9db8fec8.js"
+>>>>>>> 27d5797 (add pinned)
   ]
 }
