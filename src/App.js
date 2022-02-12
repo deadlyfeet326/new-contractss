@@ -7,7 +7,7 @@ import Filters from './components/Filters'
 import Pinned from './components/Pinned'
 import './App.css';
 
-const socket = io.connect('http://localhost:5000')
+const socket = io.connect('https://new-contract.herokuapp.com/')
 
 function App() {
 
